@@ -17,7 +17,7 @@ jobs:
           echo "${{ github.ref }}"
           ls -al
           pwd
-          git add ./portal.html
+          git add portal.html
           git commit -m  "${{ github.event.pull_request.title }}"
           git push origin gh-pages
           
