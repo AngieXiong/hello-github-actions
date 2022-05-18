@@ -1,6 +1,9 @@
 name: A workflow for my Hello World file
 on: push
 
+env:
+  user: ${{ github.event.pull_request.user.login }}
+
 jobs:
   build:
     name: Hello world action
@@ -13,4 +16,5 @@ jobs:
         run: |
           echo "Deploy the html to pages ..."
           echo "${{ github.ref }}"
-          
+          echo "${{ env.CI_COMMIT_AUTHOR }}"
+          echo "${{ github.event.pull_request.user }}"
