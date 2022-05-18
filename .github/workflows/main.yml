@@ -10,11 +10,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          ref: "gh-pages"
       
       - name: Deploy
         if: ${{ github.event_name == 'push' }}
         run: |
           echo "Deploy the html to pages ..."
           echo "${{ github.ref }}"
-          echo "${{ env.CI_COMMIT_AUTHOR }}"
-          echo "${{ github.event.pull_request.user }}"
+          git add portal.html
+          git commit -m  "${{ github.event.pull_request.title }}"
+          git push origin gh-pages
+          
