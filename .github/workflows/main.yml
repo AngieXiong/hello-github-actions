@@ -17,6 +17,8 @@ jobs:
           echo "${{ github.ref }}"
           ls -al
           pwd
+          git config --global user.email "363068948@qq.com"
+          git config --global user.name "angiexiong"
           git add portal.html
           git commit -m  "${{ github.event.pull_request.title }}"
           git push origin gh-pages
