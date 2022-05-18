@@ -8,6 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: copy
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
         env:
             SRC_FOLDER_PATH: 'build'
             TARGET_BRANCH: 'gh-pages'
