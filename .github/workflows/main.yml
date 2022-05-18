@@ -1,9 +1,6 @@
 name: A workflow for my Hello World file
 on: push
 
-env:
-  user: ${{ github.event.pull_request.user.login }}
-
 jobs:
   build:
     name: Hello world action
@@ -18,7 +15,7 @@ jobs:
         run: |
           echo "Deploy the html to pages ..."
           echo "${{ github.ref }}"
-          git add portal.html
+          git add ./portal.html
           git commit -m  "${{ github.event.pull_request.title }}"
           git push origin gh-pages
           
