@@ -13,8 +13,8 @@ jobs:
             TARGET_BRANCH: 'gh-pages'
         run: |
           files=$(find $SRC_FOLDER_PATH -type f) # get the file list
-          git config --global user.name 'angiexiong'
-          git config --global user.email '363068948@qq.com'
+          git config --global user.name 'Github Action'
+          git config --global user.email 'action@github.com'
           git fetch                         # fetch branches
           git checkout $TARGET_BRANCH       # checkout to your branch
           git checkout ${GITHUB_REF##*/} -- $files # copy files from the source branch
