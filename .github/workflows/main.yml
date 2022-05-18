@@ -7,19 +7,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-#         with:
-#           ref: "gh-pages"
-      
-      - name: Deploy
-        if: ${{ github.event_name == 'push' }}
+      - name: copy
+        env:
+            SRC_FOLDER_PATH: 'build'
+            TARGET_BRANCH: 'gh-pages'
         run: |
-          echo "Deploy the html to pages ..."
-          echo "${{ github.ref }}"
-          ls -al
-          pwd
-          git config --global user.email "363068948@qq.com"
-          git config --global user.name "angiexiong"
-          git add portal.html
-          git commit -m  "${{ github.event.pull_request.title }}"
-          git push origin gh-pages
-          
+          files=$(find $SRC_FOLDER_PATH -type f) # get the file list
+          git config --global user.name 'GitHub Action'
+          git config --global user.email 'action@github.com'
+          git fetch                         # fetch branches
+          git checkout $TARGET_BRANCH       # checkout to your branch
+          git checkout ${GITHUB_REF##*/} -- $files # copy files from the source branch
+          git add -A
+          git diff-index --quiet HEAD ||  git commit -am "deploy files"  # commit to the repository (ignore if no modification)
+          git push origin $TARGET_BRANCH # push to remote branch
